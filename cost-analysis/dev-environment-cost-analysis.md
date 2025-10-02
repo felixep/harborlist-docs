@@ -7,7 +7,7 @@
 
 ## Executive Summary
 
-This analysis compares the costs of the new Cloudflare Tunnel architecture against the previous CloudFront-based setup for the development environment. The analysis reveals significant cost implications that require immediate attention and optimization.
+This analysis compares the costs of implementing Cloudflare with S3 static website hosting via VPC endpoint (Method 1 from Cloudflare Zero Trust tutorial) against the previous CloudFront-based setup for the development environment. The analysis reveals significant cost implications that require immediate attention and optimization.
 
 ### Key Findings
 
@@ -25,9 +25,9 @@ User → Cloudflare → CloudFront → S3 (Frontend)
 User → Cloudflare → API Gateway → Lambda (API)
 ```
 
-### Current Architecture (Cloudflare Tunnel)
+### Current Architecture (Cloudflare with S3 via VPC Endpoint - Method 1)
 ```
-User → Cloudflare → EC2 (Tunnel) → S3 Website (Frontend)
+User → Cloudflare → Cloudflare Tunnel → EC2 (Tunnel Daemon) → VPC Endpoint → S3 Website (Frontend)
 User → Cloudflare → API Gateway → Lambda (API)
 ```
 
@@ -230,7 +230,7 @@ User → Cloudflare → API Gateway → Lambda (API)
 
 ## Conclusion
 
-The current Cloudflare Tunnel architecture, while providing enhanced security and control, introduces significant costs that make it unsuitable for the development environment without optimization. The primary cost drivers are the NAT Gateway and EC2 instance, which are essential for the tunnel functionality.
+The current Cloudflare with S3 via VPC endpoint architecture (Method 1), while providing enhanced security and control through private S3 access and Cloudflare Access integration, introduces significant costs that make it unsuitable for the development environment without optimization. The primary cost drivers are the NAT Gateway and EC2 instance, which are essential for running the Cloudflare tunnel daemon and providing secure access to S3 via VPC endpoint.
 
 ### Key Takeaways
 

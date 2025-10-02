@@ -142,21 +142,22 @@ aws dynamodb describe-table --table-name boat-users-prod
 
 **Static Asset Loading Failures**
 - **Symptoms:** CSS/JS files not loading, 404 errors for assets
-- **Quick Fix:** Check CloudFront distribution and S3 bucket
+- **Quick Fix:** Check Cloudflare configuration and S3 website hosting
 - **Common Causes:**
   - Incorrect asset paths
-  - CloudFront cache issues
-  - S3 bucket policy problems
+  - Cloudflare cache issues
+  - S3 bucket policy or VPC endpoint problems
+  - Cloudflare Tunnel daemon issues
 - **Solutions:**
   ```bash
   # Check S3 bucket contents
   aws s3 ls s3://boat-listing-frontend-ACCOUNT/
-  
-  # Invalidate CloudFront cache
-  aws cloudfront create-invalidation --distribution-id DISTRIBUTION-ID --paths "/*"
-  
-  # Test direct S3 access
+  # Test S3 website endpoint via VPC
   curl -I http://bucket-name.s3-website-us-east-1.amazonaws.com/
+  # Check VPC endpoint status
+  aws ec2 describe-vpc-endpoints --filters Name=service-name,Values=com.amazonaws.us-east-1.s3
+  # Purge Cloudflare cache
+  # Use Cloudflare dashboard or API to purge cache
   ```
 
 **Performance Issues**
@@ -167,10 +168,11 @@ aws dynamodb describe-table --table-name boat-users-prod
   curl -w "@curl-format.txt" -o /dev/null -s https://harborlist.com
   ```
 - **Common Solutions:**
-  - Enable Cloudflare optimization features
+  - Enable Cloudflare optimization features (Auto Minify, Rocket Loader, etc.)
+  - Verify VPC endpoint is functioning correctly
   - Implement lazy loading for images
   - Optimize bundle size with code splitting
-  - Use CDN for static assets
+  - Use Cloudflare's automatic image optimization
 - **Related:** [Performance Testing](testing/performance-testing.md)
 
 ## 🔧 Backend Issues

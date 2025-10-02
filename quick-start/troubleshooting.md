@@ -473,9 +473,10 @@ aws cloudwatch get-metric-statistics \
 ```
 
 **Solutions:**
-- Enable Cloudflare caching and optimization
+- Enable Cloudflare caching and optimization features
+- Verify VPC endpoint configuration for S3 access
 - Optimize images and static assets
-- Use CDN for static content
+- Use Cloudflare image optimization
 - Implement lazy loading
 - Optimize database queries
 

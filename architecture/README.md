@@ -2,9 +2,35 @@
 
 ## System Architecture Overview
 
-The boat listing platform follows a serverless-first, microservices architecture designed for scalability, cost-efficiency, and minimal operational overhead.
+The boat listing platform follows a serverless-first, microservices architecture designed for scalability, cost-efficiency, and minimal operational overhead. The platform implements **Cloudflare Method 1** for secure S3 access via VPC endpoints, providing enhanced security and performance.
+
+### Cloudflare Integration Overview
+
+The platform uses **Method 1** from the [Cloudflare Zero Trust S3 tutorial](https://developers.cloudflare.com/cloudflare-one/tutorials/s3-buckets/):
+
+**Key Implementation Features:**
+- ✅ **VPC Endpoint**: Private S3 access without internet exposure  
+- ✅ **Cloudflare Tunnel**: Secure connection from VPC to Cloudflare edge
+- ✅ **S3 Static Website Hosting**: Direct serving of React application
+- ✅ **Cloudflare Access**: Authentication and authorization control  
+- ✅ **Global CDN**: Edge caching and performance optimization
 
 ## Architecture Diagram
+```
+┌─────────────┐    ┌──────────────┐    ┌─────────────┐    ┌─────────────┐
+│   Users     │───▶│  Cloudflare  │───▶│ CF Tunnel   │───▶│ EC2 Daemon  │
+│ (Buyers &   │    │   CDN +      │    │  (Secure)   │    │ + VPC       │
+│  Sellers)   │    │   Access     │    │             │    │ Endpoint    │
+└─────────────┘    └──────────────┘    └─────────────┘    └─────┬───────┘
+                                                                   │
+                                                                   ▼
+                                                          ┌─────────────┐
+                                                          │     S3      │
+                                                          │   React     │
+                                                          │    App      │
+                                                          │  (Static    │
+                                                          │  Website)   │
+                                                          └─────────────┘
 
 ```
 ┌─────────────┐    ┌──────────────┐    ┌─────────────┐
@@ -57,14 +83,15 @@ Comprehensive frontend system documentation:
 =======
 ### 1. Frontend Layer
 
-#### CloudFront CDN + S3 Static Hosting
-- **Purpose**: Global content delivery and static website hosting
-- **Features**: 
-  - React application served from S3
-  - CloudFront distribution for global performance
-  - API proxy to backend services
-  - Automatic HTTPS/SSL
-  - SPA routing support (404 → index.html)
+#### Cloudflare CDN + S3 Static Hosting via VPC Endpoint
+- **Purpose**: Secure global content delivery and static website hosting
+- **Features**:
+  - React application served from S3 static website hosting
+  - Cloudflare global network for performance and security
+  - S3 access via VPC endpoint for enhanced security
+  - Cloudflare Access for authentication and authorization
+  - Automatic HTTPS/SSL with DDoS protection
+  - SPA routing support via S3 website hosting
 >>>>>>> parent of 7b06595 (feat: implement repository consolidation - documentation, scripts, and initial workflows)
 
 #### Infrastructure as Code
@@ -72,12 +99,14 @@ Comprehensive frontend system documentation:
 - **Automated Deployment**: Single command deployment of all resources
 - **Environment Separation**: Configurable for dev/staging/production
 
-#### CloudFront CDN
-- **Purpose**: Global content delivery network
+#### Cloudflare CDN with VPC Endpoint Architecture
+- **Purpose**: Secure global content delivery network with private S3 access
 - **Benefits**:
-  - Sub-second page loads worldwide
-  - Automatic HTTPS/SSL
-  - DDoS protection via AWS Shield
+  - Sub-second page loads worldwide via Cloudflare global network
+  - Automatic HTTPS/SSL with enhanced security features
+  - DDoS protection and Web Application Firewall
+  - Private S3 access via VPC endpoint eliminates public exposure
+  - Cloudflare Access for granular access control
   - Caching for static assets
 
 ### 2. API Layer
@@ -279,7 +308,8 @@ Attributes:
 ## Performance Optimization
 
 ### Caching Strategy
-- **CloudFront**: Static assets and API responses
+- **Cloudflare**: Static assets with global edge caching and advanced cache rules
+- **S3 Website Hosting**: Direct serving of static content via VPC endpoint
 - **DynamoDB DAX**: Microsecond latency for hot data
 - **Lambda Provisioned Concurrency**: Reduced cold starts
 - **OpenSearch**: Query result caching
@@ -288,7 +318,8 @@ Attributes:
 - **WebP Format**: Modern image compression
 - **Responsive Images**: Multiple sizes for different devices
 - **Lazy Loading**: Progressive image loading
-- **CDN Delivery**: Global edge locations
+- **Cloudflare Optimization**: Automatic image optimization and WebP conversion
+- **CDN Delivery**: Global edge locations with enhanced caching
 
 ## Monitoring & Observability
 

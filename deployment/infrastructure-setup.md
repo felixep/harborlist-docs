@@ -13,7 +13,7 @@ The main infrastructure is defined in [`infrastructure/lib/boat-listing-stack.ts
 - **Compute**: AWS Lambda functions for serverless backend services
 - **Storage**: DynamoDB tables for data persistence and S3 buckets for media storage
 - **API**: API Gateway for RESTful API endpoints
-- **CDN**: CloudFront distribution for frontend delivery
+- **CDN**: Cloudflare with S3 static website hosting via VPC endpoint for frontend delivery
 - **Security**: IAM roles, policies, and AWS Secrets Manager
 - **Monitoring**: CloudWatch alarms, dashboards, and SNS notifications
 

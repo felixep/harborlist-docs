@@ -2,9 +2,9 @@
 
 ## Executive Summary
 
-MarineMarket is a production-ready, serverless boat listing marketplace built on AWS with a modern React frontend. The platform leverages AWS Lambda for compute, DynamoDB for data persistence, and CloudFront for global content delivery, providing a scalable and cost-effective solution for boat trading.
+MarineMarket is a production-ready, serverless boat listing marketplace built on AWS with a modern React frontend. The platform leverages AWS Lambda for compute, DynamoDB for data persistence, and Cloudflare with S3 static website hosting via VPC endpoint for secure global content delivery, providing a scalable and cost-effective solution for boat trading.
 
-**Live Platform**: https://dunxywperij31.cloudfront.net  
+**Live Platform**: https://harborlist.com (via Cloudflare)  
 **API Endpoint**: https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod/
 
 ## High-Level Architecture
@@ -17,8 +17,9 @@ graph TB
     end
 
     subgraph "CDN & Edge"
-        CF[CloudFront Distribution]
-        S3WEB[S3 Website Hosting]
+        CF[Cloudflare CDN]
+        TUNNEL[Cloudflare Tunnel]
+        S3WEB[S3 Static Website Hosting]
     end
 
     subgraph "API Gateway"
@@ -53,14 +54,22 @@ graph TB
         SECRETS[Secrets Manager]
     end
 
+    subgraph "AWS VPC"
+        VPC[VPC Network]
+        EC2[EC2 Tunnel Daemon]
+        VPCE[VPC Endpoint for S3]
+    end
+
     subgraph "External Services"
-        CLOUDFLARE[Cloudflare Tunnel]
         SES[Amazon SES]
     end
 
     WEB --> CF
     MOBILE --> CF
-    CF --> S3WEB
+    CF --> TUNNEL
+    TUNNEL --> EC2
+    EC2 --> VPCE
+    VPCE --> S3WEB
     CF --> APIGW
     
     APIGW --> AUTH
@@ -103,9 +112,27 @@ graph TB
     ADMIN --> CW
     
     CW --> SNS
-    
-    CLOUDFLARE --> S3WEB
 ```
+
+## Cloudflare Architecture Implementation (Method 1)
+
+The platform implements **Method 1** from the [Cloudflare Zero Trust S3 tutorial](https://developers.cloudflare.com/cloudflare-one/tutorials/s3-buckets/), which provides secure access to Amazon S3 buckets via Cloudflare Access and VPC endpoints.
+
+### Architecture Benefits
+
+- **🔒 Enhanced Security**: S3 bucket is not publicly accessible; access only via VPC endpoint
+- **🚀 Performance**: Cloudflare global network with edge caching and optimization
+- **🛡️ Access Control**: Cloudflare Access provides granular authentication and authorization
+- **💰 Cost Optimization**: VPC endpoint eliminates NAT Gateway data processing charges for S3 traffic
+- **📊 Observability**: Cloudflare provides detailed analytics and monitoring
+
+### Implementation Components
+
+1. **VPC Endpoint**: Secure, private connection from VPC to S3 service
+2. **EC2 Tunnel Daemon**: Runs `cloudflared` to establish secure tunnel to Cloudflare
+3. **S3 Static Website Hosting**: Serves React application with proper routing support
+4. **Cloudflare Access**: Provides authentication and authorization layer
+5. **Cloudflare CDN**: Global edge caching and performance optimization
 
 ## Core Components
 
@@ -114,7 +141,7 @@ graph TB
 - **Build Tool**: Vite
 - **State Management**: TanStack Query for server state
 - **Routing**: React Router v6
-- **Deployment**: S3 Static Website Hosting + CloudFront
+- **Deployment**: S3 Static Website Hosting + Cloudflare via VPC endpoint
 
 **Key Files**:
 - [`frontend/src/App.tsx`](frontend/../frontend/src/App.tsx) - Main application component with routing
@@ -252,14 +279,16 @@ graph TB
 ### Performance Metrics
 - **Cold Start**: ~200-500ms for Lambda cold starts
 - **API Response**: <100ms for cached responses, <500ms for database queries
-- **CDN Cache**: 99%+ cache hit ratio for static assets
+- **CDN Cache**: 99%+ cache hit ratio for static assets via Cloudflare global network
 - **Database**: Single-digit millisecond latency for DynamoDB operations
+- **S3 Access**: Ultra-low latency via VPC endpoint direct connection
 
 ### Cost Optimization
 - **Pay-per-Use**: Serverless architecture with no idle costs
 - **DynamoDB On-Demand**: Automatic scaling without capacity planning
 - **S3 Intelligent Tiering**: Automatic cost optimization for storage
-- **CloudFront**: Reduced origin requests through edge caching
+- **Cloudflare**: Reduced origin requests through edge caching and VPC endpoint efficiency
+- **VPC Endpoint**: Eliminates NAT Gateway data processing charges for S3 traffic
 
 ## Monitoring & Observability
 
@@ -331,7 +360,7 @@ graph TB
 | Build | Vite | Fast development and production builds |
 | Styling | Tailwind CSS | Utility-first CSS framework |
 | State | TanStack Query | Server state management |
-| CDN | CloudFront | Global content delivery |
+| CDN | Cloudflare | Global content delivery with S3 via VPC endpoint |
 | API | API Gateway | RESTful API management |
 | Compute | AWS Lambda | Serverless function execution |
 | Database | DynamoDB | NoSQL document database |

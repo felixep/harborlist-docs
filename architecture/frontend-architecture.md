@@ -434,7 +434,7 @@ npm run preview      # Preview production build locally
 
 ### 2. External Services
 
-- **CloudFront CDN**: Asset delivery optimization
+- **Cloudflare CDN**: Asset delivery optimization via VPC endpoint
 - **S3 Storage**: Direct file upload to S3
 - **Analytics**: User behavior tracking (planned)
 

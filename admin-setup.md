@@ -246,7 +246,7 @@ https://dev.harborlist.com/admin/login
 
 #### **Development (No Custom Domains)**
 ```
-https://[cloudfront-id].cloudfront.net/admin/login
+https://harborlist.com/admin/login
 ```
 
 #### **Local Development**

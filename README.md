@@ -14,9 +14,9 @@ Welcome to the comprehensive documentation hub for MarineMarket, a production-re
 - **🚀 Status**: Live in production with comprehensive monitoring and admin capabilities
 
 ### System Status Dashboard
-- 🟢 **Production Platform**: [Live Site](https://dunxywperij31.cloudfront.net) - Fully operational
+- 🟢 **Production Platform**: [Live Site](https://harborlist.com) - Fully operational via Cloudflare
 - 🟢 **API Services**: [Backend API](https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod/) - All services healthy
-- 🟢 **Admin Dashboard**: [Admin Portal](https://dunxywperij31.cloudfront.net/admin) - Management interface active
+- 🟢 **Admin Dashboard**: [Admin Portal](https://harborlist.com/admin) - Management interface active
 - 🟢 **Infrastructure**: AWS CDK deployed - All resources operational
 - 🟢 **Monitoring**: CloudWatch alerts active - System health monitored 24/7
 
@@ -84,9 +84,9 @@ Welcome to the comprehensive documentation hub for MarineMarket, a production-re
 
 ### Infrastructure & DevOps
 - **Infrastructure as Code**: AWS CDK with TypeScript
-- **CDN**: CloudFront for global content delivery
+- **CDN**: Cloudflare with S3 static website hosting via VPC endpoint
+- **Security**: Cloudflare Access, VPC endpoint, IAM roles, JWT authentication, encryption at rest
 - **Monitoring**: CloudWatch with custom dashboards
-- **Security**: IAM roles, JWT authentication, encryption at rest
 - **CI/CD**: GitHub Actions for automated deployments
 
 ## 📚 Complete Documentation Sections
@@ -322,7 +322,7 @@ npm run deploy:prod          # Deploy to production (requires approval)
 ## 🎯 **Quick Start**
 
 - **[README](../README.md)** - Main project overview and quick start guide
-- **[Live Platform](https://dunxywperij31.cloudfront.net)** - Visit the live application
+- **[Live Platform](https://harborlist.com)** - Visit the live application
 - **[API Endpoints](https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod/)** - Backend API access
 
 ## 📋 **Project Status & Overview**
@@ -379,7 +379,7 @@ npm run deploy:prod          # Deploy to production (requires approval)
 
 ### **Technical Excellence**
 - ⚡ **Serverless Architecture** on AWS
-- 🌐 **Global CDN** via CloudFront
+- 🌐 **Global CDN** via Cloudflare
 - 🔒 **Enterprise Security** with JWT authentication
 - 📱 **Mobile-Optimized** responsive design
 - 🚀 **Production-Ready** deployment
@@ -388,10 +388,10 @@ npm run deploy:prod          # Deploy to production (requires approval)
 ## 🔗 **Quick Links**
 
 ### **For Users**
-- [Visit Live Site](https://dunxywperij31.cloudfront.net)
-- [Browse Boats](https://dunxywperij31.cloudfront.net/search)
-- [List Your Boat](https://dunxywperij31.cloudfront.net/create)
-- [Get Boat Valuation](https://dunxywperij31.cloudfront.net/valuation)
+- [Visit Live Site](https://harborlist.com)
+- [Browse Boats](https://harborlist.com/search)
+- [List Your Boat](https://harborlist.com/create)
+- [Get Boat Valuation](https://harborlist.com/valuation)
 
 ### **For Developers**
 - [API Documentation](API.md)
@@ -408,7 +408,7 @@ npm run deploy:prod          # Deploy to production (requires approval)
 
 ---
 
-**📧 Questions?** Check the [Help Center](https://dunxywperij31.cloudfront.net/help) or [Contact Us](https://dunxywperij31.cloudfront.net/contact)
+**📧 Questions?** Check the [Help Center](https://harborlist.com/help) or [Contact Us](https://harborlist.com/contact)
 
 **🚤 MarineMarket - Your Complete Boat Marketplace Platform** ✨
 >>>>>>> parent of 7b06595 (feat: implement repository consolidation - documentation, scripts, and initial workflows)

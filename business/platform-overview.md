@@ -353,7 +353,8 @@ const engagementMetrics = {
 
 ### Infrastructure
 - **AWS CDK**: Infrastructure as Code with TypeScript
-- **CloudFront**: Global CDN for fast content delivery
+- **Cloudflare**: Global CDN with S3 via VPC endpoint for secure, fast content delivery
+- **VPC Endpoint**: Private S3 access without internet exposure
 - **CloudWatch**: Comprehensive monitoring and alerting
 - **Secrets Manager**: Secure credential and configuration management
 

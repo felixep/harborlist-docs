@@ -98,7 +98,7 @@ Development workflow and contribution procedures:
 - **Serverless**: AWS Lambda for scalable serverless compute
 - **Database**: Amazon RDS PostgreSQL for managed database service
 - **Storage**: Amazon S3 for file storage and static asset hosting
-- **CDN**: Cloudflare for global content delivery and performance optimization
+- **CDN**: Cloudflare with S3 static website hosting via VPC endpoint for secure global content delivery and performance optimization
 
 ## Development Workflow
 

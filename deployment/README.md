@@ -27,7 +27,7 @@ cdk deploy
 
 ### Deployment Outputs
 After successful deployment, note these outputs:
-- `FrontendUrl`: Your application's public URL (CloudFront)
+- `FrontendUrl`: Your application's public URL (Cloudflare)
 - `ApiUrl`: Backend API endpoint
 - `MediaBucketName`: S3 bucket for media uploads
 - `FrontendBucketName`: S3 bucket for frontend hosting
@@ -57,7 +57,8 @@ After successful deployment, note these outputs:
         "cognito-idp:*",
         "opensearch:*",
         "ses:*",
-        "cloudfront:*",
+        "ec2:*",
+        "s3:*",
         "route53:*",
         "acm:*"
       ],
@@ -192,7 +193,7 @@ aws acm request-certificate \
   --subject-alternative-names "*.boatlistings.com" \
   --validation-method DNS
 
-# Update CloudFront distribution
+# Update Cloudflare tunnel configuration
 cdk deploy BoatListingsFrontendStack --parameters DomainName=boatlistings.com
 ```
 
@@ -341,7 +342,7 @@ curl -f https://api.boatlistings.com/health || echo "API is down"
 - [ ] Lambda function error rates
 - [ ] DynamoDB throttling metrics
 - [ ] S3 storage costs
-- [ ] CloudFront cache hit rates
+- [ ] Cloudflare cache hit rates
 
 ### Weekly Maintenance
 - [ ] Review CloudWatch logs for errors
@@ -376,7 +377,7 @@ aws s3api put-bucket-lifecycle-configuration \
 - Review DynamoDB read/write capacity
 - Optimize Lambda memory allocation
 - Configure S3 storage classes
-- Review CloudFront caching rules
+- Review Cloudflare caching rules and VPC endpoint configuration
 - Monitor OpenSearch cluster size
 
 ## Security Checklist

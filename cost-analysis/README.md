@@ -4,7 +4,7 @@ This directory contains comprehensive cost analysis documentation for the Cloudf
 
 ## 📋 Overview
 
-The cost analysis was performed as part of Task 14 in the Cloudflare Architecture specification to evaluate the financial impact of migrating from CloudFront to Cloudflare Tunnel architecture for the development environment.
+The cost analysis was performed as part of Task 14 in the Cloudflare Architecture specification to evaluate the financial impact of migrating from CloudFront to Cloudflare with S3 static website hosting via VPC endpoint (Method 1 from Cloudflare Zero Trust S3 tutorial) for the development environment.
 
 ## 📁 Files and Reports
 

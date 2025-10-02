@@ -28,7 +28,7 @@ This document provides comprehensive operational runbooks for the MarineMarket p
 - [Lambda Function Issues](#lambda-function-issues)
 - [DynamoDB Performance Issues](#dynamodb-performance-issues)
 - [API Gateway Problems](#api-gateway-problems)
-- [CloudFront and CDN Issues](#cloudfront-and-cdn-issues)
+- [Cloudflare and CDN Issues](#cloudflare-and-cdn-issues)
 
 ## Daily Operations
 
@@ -789,27 +789,36 @@ curl -X OPTIONS -H "Origin: https://harborlist.com" \
 - Implement proper rate limiting in application
 - Monitor throttling metrics
 
-### CloudFront and CDN Issues
+### Cloudflare and CDN Issues
 
 #### Common Symptoms
 - Slow content delivery
 - Cache misses
-- Origin errors
+- Origin access errors
 - SSL/TLS issues
+- Tunnel daemon connectivity problems
 
 #### Diagnostic Steps
 
-1. **Check CloudFront Distribution**
+1. **Check Cloudflare Tunnel Status**
    ```bash
-   # Get distribution status
-   aws cloudfront list-distributions \
-     --query "DistributionList.Items[?contains(Origins.Items[0].DomainName, 'harborlist')].{Id:Id,Status:Status,DomainName:DomainName}" \
-     --region us-east-1
+   # Check tunnel daemon status on EC2
+   sudo systemctl status cloudflared
+   # View tunnel logs
+   sudo journalctl -u cloudflared -f
    ```
 
-2. **Test Cache Behavior**
+2. **Verify VPC Endpoint**
    ```bash
-   # Check cache headers
+   # Check VPC endpoint status
+   aws ec2 describe-vpc-endpoints --filters Name=service-name,Values=com.amazonaws.us-east-1.s3
+   # Test S3 access via VPC endpoint
+   curl -I http://bucket-name.s3-website-us-east-1.amazonaws.com/
+   ```
+
+3. **Test Cache Behavior**
+   ```bash
+   # Check cache headers via Cloudflare
    curl -I https://harborlist.com
    curl -I https://harborlist.com/static/js/main.js
    ```
@@ -817,14 +826,19 @@ curl -X OPTIONS -H "Origin: https://harborlist.com" \
 #### Resolution Actions
 
 **Cache Issues:**
-- Review cache behaviors and TTL settings
-- Implement proper cache headers in origin
-- Use cache invalidation when needed
+- Review Cloudflare cache rules and page rules
+- Implement proper cache headers in S3 website hosting
+- Use Cloudflare cache purge when needed
 
-**Origin Issues:**
-- Verify origin server health
-- Check origin access identity configuration
-- Review security group and NACL settings
+**Tunnel Issues:**
+- Restart cloudflared daemon: `sudo systemctl restart cloudflared`
+- Verify tunnel configuration and credentials
+- Check EC2 instance health and security groups
+
+**VPC Endpoint Issues:**
+- Verify VPC endpoint route table configuration
+- Check S3 bucket policy allows VPC endpoint access
+- Review security group rules for EC2 tunnel daemon
 
 ## Emergency Contacts and Escalation
 

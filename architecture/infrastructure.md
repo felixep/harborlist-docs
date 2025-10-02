@@ -14,7 +14,7 @@ The HarborList platform follows a modern web application architecture with the f
 - **Backend:** Node.js REST API server
 - **Database:** PostgreSQL for data persistence
 - **Infrastructure:** AWS cloud services
-- **CDN:** CloudFlare for content delivery
+- **CDN:** Cloudflare with S3 static website hosting via VPC endpoint
 
 ### Architecture Principles
 
@@ -70,11 +70,11 @@ Backend (Node.js)
 
 ### AWS Services
 
-- **EC2:** Application hosting
+- **EC2:** Cloudflare Tunnel daemon hosting
 - **RDS:** Database hosting
-- **S3:** File and media storage
-- **CloudFront:** Content delivery network
-- **Route 53:** DNS management
+- **S3:** File storage and static website hosting
+- **VPC:** Private network with VPC endpoint for S3 access
+- **Route 53:** DNS management (optional)
 
 ### Deployment Architecture
 
