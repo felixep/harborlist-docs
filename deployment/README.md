@@ -27,10 +27,18 @@ cdk deploy
 
 ### Deployment Outputs
 After successful deployment, note these outputs:
-- `FrontendUrl`: Your application's public URL (Cloudflare)
-- `ApiUrl`: Backend API endpoint
+- `FrontendUrl`: Frontend application URL (via Cloudflare CDN)
+- `ApiUrl`: Backend API custom domain endpoint
 - `MediaBucketName`: S3 bucket for media uploads
 - `FrontendBucketName`: S3 bucket for frontend hosting
+
+### Environment Domain Structure
+Each environment has its own domain structure:
+- **Development**: `dev.harborlist.com` + `dev-api.harborlist.com`
+- **Staging**: `staging.harborlist.com` + `staging-api.harborlist.com`  
+- **Production**: `harborlist.com` + `api.harborlist.com`
+
+**Note**: The `ApiUrl` output will contain the actual API Gateway ID. Use this URL to replace the `{api-gateway-id}` placeholder in your environment configurations and API documentation.
 
 ## Manual Deployment (Alternative)
 

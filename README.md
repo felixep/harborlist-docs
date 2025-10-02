@@ -1,5 +1,23 @@
 <<<<<<< HEAD
-# 🚤 MarineMarket Platform Documentation
+# ### Environment Endpoints
+The platform provides different endpoints for each environment:
+
+**Production**
+- 🌐 **Frontend**: [https://harborlist.com](https://harborlist.com) - Main application
+- 🔗 **API**: `https://api.harborlist.com` - Backend API
+- 👨‍💼 **Admin**: [https://harborlist.com/admin](https://harborlist.com/admin) - Administrative dashboard
+
+**Staging**
+- 🌐 **Frontend**: [https://staging.harborlist.com](https://staging.harborlist.com) - Pre-production testing
+- 🔗 **API**: `https://staging-api.harborlist.com` - Staging API
+- 👨‍💼 **Admin**: [https://staging.harborlist.com/admin](https://staging.harborlist.com/admin) - Staging admin
+
+**Development**
+- 🌐 **Frontend**: [https://dev.harborlist.com](https://dev.harborlist.com) - Development environment
+- � **API**: `https://dev-api.harborlist.com` - Development API
+- 👨‍💼 **Admin**: [https://dev.harborlist.com/admin](https://dev.harborlist.com/admin) - Development admin
+
+*All endpoints are served via Cloudflare CDN with SSL/TLS termination*neMarket Platform Documentation
 
 Welcome to the comprehensive documentation hub for MarineMarket, a production-ready serverless boat listing marketplace. This unified documentation system serves as the single source of truth for all platform information.
 
@@ -11,14 +29,15 @@ Welcome to the comprehensive documentation hub for MarineMarket, a production-re
 - **🏗️ Architecture**: Serverless-first design with React frontend and AWS Lambda backend
 - **🔒 Security**: Enterprise-grade security with JWT authentication and role-based access
 - **📊 Scale**: Built to handle thousands of listings with real-time search and analytics
-- **🚀 Status**: Live in production with comprehensive monitoring and admin capabilities
+- **🚀 Status**: Production-ready architecture with comprehensive monitoring and admin capabilities
 
-### System Status Dashboard
-- 🟢 **Production Platform**: [Live Site](https://harborlist.com) - Fully operational via Cloudflare
-- 🟢 **API Services**: [Backend API](https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod/) - All services healthy
-- 🟢 **Admin Dashboard**: [Admin Portal](https://harborlist.com/admin) - Management interface active
-- 🟢 **Infrastructure**: AWS CDK deployed - All resources operational
-- 🟢 **Monitoring**: CloudWatch alerts active - System health monitored 24/7
+### Infrastructure Endpoints
+After deployment, the infrastructure will provide the following endpoints:
+- 🌐 **Frontend Platform**: [https://harborlist.com](https://harborlist.com) - Served via Cloudflare CDN
+- � **API Gateway**: `https://{api-gateway-id}.execute-api.us-east-1.amazonaws.com/prod/` - Backend API endpoint
+- 👨‍� **Admin Interface**: [https://harborlist.com/admin](https://harborlist.com/admin) - Administrative dashboard
+- 🏗️ **Infrastructure**: Deployed via AWS CDK - All resources provisioned
+- � **Monitoring**: CloudWatch dashboards and alerts configured
 
 ## 🎯 Quick Navigation by Role
 
@@ -312,7 +331,7 @@ npm run deploy:prod          # Deploy to production (requires approval)
 
 *📅 Documentation System - Unified, validated, and maintained automatically*  
 *🔄 Last Updated: Auto-updated with each deployment*  
-*✅ Status: All systems operational - Ready for development and production use*
+*✅ Status: Infrastructure ready for deployment - Documentation validated and complete*
 
 =======
 # 📚 MarineMarket Documentation
@@ -322,8 +341,8 @@ npm run deploy:prod          # Deploy to production (requires approval)
 ## 🎯 **Quick Start**
 
 - **[README](../README.md)** - Main project overview and quick start guide
-- **[Live Platform](https://harborlist.com)** - Visit the live application
-- **[API Endpoints](https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod/)** - Backend API access
+- **[Platform Access](https://harborlist.com)** - Frontend application endpoint
+- **[API Documentation](reference/api-reference.md)** - Backend API reference and endpoints
 
 ## 📋 **Project Status & Overview**
 
@@ -361,7 +380,7 @@ npm run deploy:prod          # Deploy to production (requires approval)
 | **Interactive Tools** | 3 | ✅ Functional |
 | **Support Channels** | 3 | ✅ Active |
 | **Documentation Pages** | 12+ | ✅ Complete |
-| **Deployment Status** | Live | ✅ Production |
+| **Deployment Status** | Infrastructure Ready | ✅ Production-Ready |
 
 ## 🎉 **Platform Highlights**
 
@@ -388,10 +407,10 @@ npm run deploy:prod          # Deploy to production (requires approval)
 ## 🔗 **Quick Links**
 
 ### **For Users**
-- [Visit Live Site](https://harborlist.com)
-- [Browse Boats](https://harborlist.com/search)
-- [List Your Boat](https://harborlist.com/create)
-- [Get Boat Valuation](https://harborlist.com/valuation)
+- [Platform Home](https://harborlist.com) - Main application interface
+- [Search Listings](https://harborlist.com/search) - Boat search functionality
+- [Create Listing](https://harborlist.com/create) - List a boat for sale
+- [Boat Valuation](https://harborlist.com/valuation) - Get market value estimates
 
 ### **For Developers**
 - [API Documentation](API.md)
@@ -411,4 +430,4 @@ npm run deploy:prod          # Deploy to production (requires approval)
 **📧 Questions?** Check the [Help Center](https://harborlist.com/help) or [Contact Us](https://harborlist.com/contact)
 
 **🚤 MarineMarket - Your Complete Boat Marketplace Platform** ✨
->>>>>>> parent of 7b06595 (feat: implement repository consolidation - documentation, scripts, and initial workflows)
+

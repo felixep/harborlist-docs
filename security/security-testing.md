@@ -613,7 +613,7 @@ def run_burp_scan():
     # Configure scan settings
     scan_config = {
         'urls': [
-            'https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod/'
+            'https://api.harborlist.com/'
         ],
         'scan_type': 'active',
         'crawl_and_audit': True,
@@ -716,7 +716,7 @@ templates:
 
 targets:
   - https://dunxywperij31.cloudfront.net
-  - https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod/
+  - https://api.harborlist.com/
 
 rate-limit: 150
 timeout: 10
@@ -828,7 +828,7 @@ class SecurityTester:
 
 def run_security_tests():
     tester = SecurityTester(
-        base_url='https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod',
+        base_url='https://api.harborlist.com',
         admin_token='your-test-admin-token'
     )
     

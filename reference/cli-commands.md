@@ -729,7 +729,9 @@ CLOUDFLARE_API_TOKEN=your-cf-token       # Cloudflare API token
 
 ```bash
 # API Configuration
-VITE_API_BASE_URL=https://api.example.com # Backend API URL
+VITE_API_BASE_URL=https://api.harborlist.com # Backend API URL (production)
+# Development: https://dev-api.harborlist.com
+# Staging: https://staging-api.harborlist.com
 VITE_API_TIMEOUT=30000                    # API request timeout
 
 # Environment

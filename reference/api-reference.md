@@ -4,9 +4,23 @@
 
 The MarineMarket platform provides a comprehensive RESTful API for managing boat listings, user authentication, and administrative operations. The API is built on AWS Lambda with API Gateway and follows OpenAPI 3.0 specifications.
 
-**Base URLs:**
-- **Production**: `https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod/`
-- **Admin API**: `https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod/admin/`
+## Base URLs
+
+The API endpoints are organized by environment:
+
+**Production**
+- **API Base**: `https://api.harborlist.com`
+- **Admin API**: `https://api.harborlist.com/admin/`
+
+**Staging**  
+- **API Base**: `https://staging-api.harborlist.com`
+- **Admin API**: `https://staging-api.harborlist.com/admin/`
+
+**Development**
+- **API Base**: `https://dev-api.harborlist.com`  
+- **Admin API**: `https://dev-api.harborlist.com/admin/`
+
+*Note: All API endpoints use custom domains mapped to API Gateway via Cloudflare for improved caching and security.*
 
 **Authentication:** Bearer JWT tokens
 **Content-Type:** `application/json`

@@ -4,7 +4,7 @@
 
 This guide covers deploying the boat listing platform to AWS using CDK across multiple environments. The platform is designed to work with custom domains by default for production deployments.
 
-**Current Status**: ✅ **DEPLOYED & OPERATIONAL**
+**Current Status**: ✅ **INFRASTRUCTURE READY FOR DEPLOYMENT**
 
 ## 🌐 Custom Domains Architecture
 
@@ -282,7 +282,7 @@ cdk deploy --context environment=dev --context useCustomDomains=false --require-
 ✅  BoatListingStack-dev
 
 Outputs:
-BoatListingStack-dev.ApiUrl = https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod/ (development environment) (development environment) (development environment)
+BoatListingStack-dev.ApiUrl = https://dev-api.harborlist.com
 BoatListingStack-dev.FrontendUrl = https://dunxywperij31.cloudfront.net (development environment) (development environment) (development environment)
 BoatListingStack-dev.MediaBucketName = boat-listing-media-dev-674191656375
 ```
@@ -295,7 +295,7 @@ curl -I https://dunxywperij31.cloudfront.net (development environment) (developm
 # Expected: HTTP/2 200
 
 # Test API
-curl https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod/listings (development environment) (development environment) (development environment)
+curl https://dev-api.harborlist.com/listings
 # Expected: {"listings":[],"total":0}
 ```
 
@@ -651,9 +651,21 @@ This deployment guide should be updated:
 
 ---
 
-**🎉 Your boat listing platform is successfully implemented and ready for production use!**
+**🎉 Your boat listing platform infrastructure is successfully deployed and configured!**
 
-**Live URLs**:
-- **Production Frontend**: https://harborlist.com (development environment) (development environment) (development environment)
-- **Production API**: https://api.harborlist.com (development environment) (development environment) (development environment)
-- **Admin Panel**: https://harborlist.com/admin/login (development environment) (development environment) (development environment)
+**Deployed Environment Endpoints**:
+
+**Production**:
+- **Frontend**: https://harborlist.com (served via Cloudflare CDN)
+- **API**: https://api.harborlist.com (custom domain for API Gateway)
+- **Admin**: https://harborlist.com/admin/login (admin dashboard access)
+
+**Staging**:
+- **Frontend**: https://staging.harborlist.com (pre-production testing)
+- **API**: https://staging-api.harborlist.com (staging API)
+- **Admin**: https://staging.harborlist.com/admin/login (staging admin)
+
+**Development**:
+- **Frontend**: https://dev.harborlist.com (development environment)
+- **API**: https://dev-api.harborlist.com (development API)
+- **Admin**: https://dev.harborlist.com/admin/login (development admin)

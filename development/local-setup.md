@@ -193,9 +193,19 @@ nano .env.local  # or use your preferred editor
 
 **Frontend Environment Variables (.env.local):**
 ```bash
-# API Configuration
-VITE_API_BASE_URL=https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod
-VITE_ADMIN_API_BASE_URL=https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod/admin
+```bash
+# Backend API Configuration (choose appropriate environment)
+# For development environment:
+VITE_API_BASE_URL=https://dev-api.harborlist.com
+VITE_ADMIN_API_BASE_URL=https://dev-api.harborlist.com/admin
+
+# For staging environment:
+# VITE_API_BASE_URL=https://staging-api.harborlist.com
+# VITE_ADMIN_API_BASE_URL=https://staging-api.harborlist.com/admin
+
+# For production environment:
+# VITE_API_BASE_URL=https://api.harborlist.com
+# VITE_ADMIN_API_BASE_URL=https://api.harborlist.com/admin
 
 # Environment
 VITE_ENVIRONMENT=development

@@ -4,8 +4,14 @@
 
 MarineMarket is a production-ready, serverless boat listing marketplace built on AWS with a modern React frontend. The platform leverages AWS Lambda for compute, DynamoDB for data persistence, and Cloudflare with S3 static website hosting via VPC endpoint for secure global content delivery, providing a scalable and cost-effective solution for boat trading.
 
-**Live Platform**: https://harborlist.com (via Cloudflare)  
-**API Endpoint**: https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod/
+**Production Environment**:
+- **Frontend**: https://harborlist.com (served via Cloudflare CDN)
+- **API**: https://api.harborlist.com (custom domain for API Gateway)
+
+**Environment Structure**:
+- **Development**: https://dev.harborlist.com + https://dev-api.harborlist.com
+- **Staging**: https://staging.harborlist.com + https://staging-api.harborlist.com  
+- **Production**: https://harborlist.com + https://api.harborlist.com
 
 ## High-Level Architecture
 
@@ -133,6 +139,24 @@ The platform implements **Method 1** from the [Cloudflare Zero Trust S3 tutorial
 3. **S3 Static Website Hosting**: Serves React application with proper routing support
 4. **Cloudflare Access**: Provides authentication and authorization layer
 5. **Cloudflare CDN**: Global edge caching and performance optimization
+6. **Custom Domains**: Environment-specific subdomains for clean URL structure
+
+### Domain Architecture
+
+Each environment uses dedicated subdomains for clear separation and organization:
+
+| Environment | Frontend Domain | API Domain |
+|------------|----------------|------------|
+| Development | `dev.harborlist.com` | `dev-api.harborlist.com` |
+| Staging | `staging.harborlist.com` | `staging-api.harborlist.com` |
+| Production | `harborlist.com` | `api.harborlist.com` |
+
+**Benefits of Custom Domains:**
+- 🎯 **Clean URLs**: Professional appearance and easier to remember
+- 🔒 **SSL/TLS**: Automatic HTTPS with Cloudflare certificates
+- 🚀 **Performance**: Edge caching and optimization at DNS level
+- 🏷️ **Environment Isolation**: Clear separation between environments
+- 📊 **Analytics**: Better tracking and monitoring per environment
 
 ## Core Components
 

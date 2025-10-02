@@ -6,7 +6,14 @@ MarineMarket is a modern, serverless boat marketplace platform that connects boa
 
 **Live Platform**: [https://dunxywperij31.cloudfront.net](https://dunxywperij31.cloudfront.net)  
 **Admin Dashboard**: [Admin Portal](https://dunxywperij31.cloudfront.net/admin)  
-**API Endpoint**: [https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod/](https://kz82y80qu2.execute-api.us-east-1.amazonaws.com/prod/)
+**Production Platform**:
+- **Frontend**: [https://harborlist.com](https://harborlist.com) (served via Cloudflare CDN)
+- **API**: `https://api.harborlist.com` (custom domain for API Gateway)
+
+**Environment Structure**:
+- **Development**: https://dev.harborlist.com + https://dev-api.harborlist.com
+- **Staging**: https://staging.harborlist.com + https://staging-api.harborlist.com
+- **Production**: https://harborlist.com + https://api.harborlist.com
 
 ## Business Capabilities
 
